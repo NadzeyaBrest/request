@@ -1,13 +1,13 @@
 import Repository from "../../repository";
 import { users } from "../reducers/users";
 
-export const getUsers = () => async (dispatch) => {
+export const getShopping = () => async (dispatch) => {
   try {
-    const { value, error } = await Repository.UsersActions.getUsersFromApi();
+    const { value, error } = await Repository.UsersActions.getShoppingFromApi();
     if (error) {
       console.log("error getting");
     } else {
-      dispatch(users.actions.setUsers(value));
+      dispatch(users.actions.setShopping(value));
     }
   } catch (error) {
     console.log(error);

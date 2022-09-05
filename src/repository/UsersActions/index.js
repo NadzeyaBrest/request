@@ -1,13 +1,13 @@
 import Connector from "../connector";
 
 class UsersActions {
-  getUsersFromApi = async () => {
+  getShoppingFromApi = async () => {
     const result = {
       value: null,
       error: null,
     };
     try {
-      const response = await Connector.connector.get("users");
+      const response = await Connector.connector.get("shopping");
       result.value = response.data;
     } catch (error) {
       result.error = error;

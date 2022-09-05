@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../store/actions/users";
+import { getShopping } from "../../store/actions/users";
 import { users } from "../../store/reducers/users";
 
 const Article = () => {
@@ -15,7 +15,7 @@ const Article = () => {
     setValue("");
   };
   const takeMessage = () => {
-    dispatch(getUsers());
+    dispatch(getShopping());
   };
 
   let message = useSelector((state) => state.users.message);
