@@ -51,7 +51,7 @@ export const putShopping = (id, change) => async (dispatch) => {
     if (error) {
       console.log("error getting");
     } else {
-      dispatch(users.actions.changeShopping(id, change));
+      dispatch(users.actions.changeShopping(id, value));
     }
   } catch (error) {
     console.log(error);

@@ -17,9 +17,10 @@ export const users = createSlice({
       let deleteIndex = state.shopping.findIndex((order) => order[id]);
       state.shopping.splice(deleteIndex, 1);
     },
-    changeShopping(state, id, change) {
+    changeShopping(state, id, value) {
       let changeIndex = state.shopping.findIndex((order) => order[id]);
-      state.shopping.splice(changeIndex, 1, change);
+      state.shopping.splice(changeIndex, 1);
+      state.shopping.push(value);
     },
   },
 });

@@ -20,25 +20,27 @@ const Article = () => {
   let shoppingList = useSelector((state) => state.users.shopping);
   console.log(shoppingList);
 
-  useEffect(() => {
-    dispatch(getShopping());
-  }, [shoppingList]);
+  // useEffect(() => {
+  //   dispatch(getShopping());
+  // }, []);
   const takeMessage = () => {
     dispatch(getShopping());
   };
   const deleteOrder = (id) => {
     dispatch(deleteShopping(id));
   };
-  // const changOrder = (cloth) => {
-  //   setValue(cloth);
-  //   // dispatch(putShopping(id));
-  // };
+  const changOrder = (id, cloth) => {
+    // setValue(cloth);
+    dispatch(putShopping(id, cloth));
+  };
   let shoppingListElement = shoppingList.map((order) => {
     return (
       <li key={order._id}>
         {order.cloth}
         <button onClick={() => deleteOrder(order._id)}>delete</button>
-        {/* <button onClick={() => changOrder(order._cloth)}>change</button> */}
+        <button onClick={() => changOrder(order._id, order._cloth)}>
+          change
+        </button>
       </li>
     );
   });
