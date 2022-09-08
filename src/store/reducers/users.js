@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-  Shopping: [],
+  shopping: [],
   message: {},
 };
 export const users = createSlice({
@@ -8,10 +8,23 @@ export const users = createSlice({
   initialState,
   reducers: {
     setShopping(state, { payload }) {
-      state.users = payload;
+      state.shopping = payload;
     },
-    setMessage(state, { payload }) {
-      state.message = payload;
+    addShopping(state, { payload }) {
+      state.shopping.push(payload);
+    },
+    reduceShopping(state, id) {
+      let deleteIndex = state.shopping.findIndex((order) => order[id]);
+      state.shopping.splice(deleteIndex, 1);
+    },
+    changeShopping(state, { payload }) {
+      let { id, value } = payload;
+      // let changeIndex = state.shopping.findIndex((order) => order[id]);
+      // state.shopping.splice(changeIndex, 1, value);
+      // // state.shopping.push(value);
+      state.shopping = state.shopping.map(
+        (item) => (item._id = id ? { ...item, cloth: value } : item)
+      );
     },
   },
 });

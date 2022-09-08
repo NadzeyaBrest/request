@@ -7,13 +7,59 @@ class UsersActions {
       error: null,
     };
     try {
-      const response = await Connector.connector.get("shopping");
+      const response = await Connector.connector.get("");
       result.value = response.data;
     } catch (error) {
       result.error = error;
     }
-    console.log(result);
+    return result;
+  };
+
+  postShoppingFromApi = async (order) => {
+    console.log(order);
+    const result = {
+      value: null,
+      error: null,
+    };
+    try {
+      const response = await Connector.connector.post("/", {
+        cloth: order,
+      });
+      result.value = response.data;
+    } catch (error) {
+      result.error = error;
+    }
+    return result;
+  };
+  deleteShoppingFromApi = async (order) => {
+    console.log(order);
+    const result = {
+      value: null,
+      error: null,
+    };
+    try {
+      const response = await Connector.connector.delete(`/${order}`);
+      result.value = response.data;
+    } catch (error) {
+      result.error = error;
+    }
+    return result;
+  };
+  putShoppingFromApi = async (order) => {
+    const result = {
+      value: null,
+      error: null,
+    };
+    try {
+      const response = await Connector.connector.put(`/${order.id}`, {
+        cloth: order.value,
+      });
+      result.value = response.data;
+    } catch (error) {
+      result.error = error;
+    }
     return result;
   };
 }
+
 export default new UsersActions();

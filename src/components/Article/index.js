@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getShopping } from "../../store/actions/users";
-import { users } from "../../store/reducers/users";
+import {
+  getShopping,
+  setShopping,
+  deleteShopping,
+  putShopping,
+} from "../../store/actions/users";
 
 const Article = () => {
   let [value, setValue] = useState("");
@@ -10,18 +14,39 @@ const Article = () => {
     setValue(inf);
   };
   const sendMessage = (value) => {
-    dispatch(users.actions.setMessage(value));
-
+    dispatch(setShopping(value));
     setValue("");
   };
+  let shoppingList = useSelector((state) => state.users.shopping);
+
+  useEffect(() => {
+    dispatch(getShopping());
+  }, []);
   const takeMessage = () => {
     dispatch(getShopping());
   };
-
-  let message = useSelector((state) => state.users.message);
-  console.log(`from state ${message}`);
-  let quotes = useSelector((state) => state.users.users);
-  console.log(`from api ${quotes}`);
+  const deleteOrder = (id) => {
+    dispatch(deleteShopping(id));
+  };
+  const changOrder = (id, value) => {
+    // setValue(cloth);
+    let order = {
+      id: id,
+      cloth: value,
+    };
+    dispatch(putShopping(order));
+  };
+  let shoppingListElement = shoppingList.map((order) => {
+    return (
+      <li key={order._id}>
+        {order.cloth}
+        <button onClick={() => deleteOrder(order._id)}>delete</button>
+        <button onClick={() => changOrder(order._id, order.cloth)}>
+          change
+        </button>
+      </li>
+    );
+  });
   return (
     <div>
       <input
@@ -30,8 +55,12 @@ const Article = () => {
         placeholder="введите сообщение"
         onChange={(e) => change(e.target.value)}
       />
-      <button onClick={() => sendMessage(value)}>Send message</button>
+      <button onClick={() => sendMessage(value)}>Send order</button>
       <button onClick={takeMessage}> Take from Api</button>
+      <div className="busket">
+        <p>Корзина</p>
+        <ul>{shoppingListElement}</ul>
+      </div>
     </div>
   );
 };
