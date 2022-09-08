@@ -45,14 +45,14 @@ class UsersActions {
     }
     return result;
   };
-  putShoppingFromApi = async (id, change) => {
+  putShoppingFromApi = async (order) => {
     const result = {
       value: null,
       error: null,
     };
     try {
-      const response = await Connector.connector.put(`/${id}`, {
-        cloth: change,
+      const response = await Connector.connector.put(`/${order.id}`, {
+        cloth: order.value,
       });
       result.value = response.data;
     } catch (error) {

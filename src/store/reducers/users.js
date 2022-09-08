@@ -17,10 +17,14 @@ export const users = createSlice({
       let deleteIndex = state.shopping.findIndex((order) => order[id]);
       state.shopping.splice(deleteIndex, 1);
     },
-    changeShopping(state, id, value) {
-      let changeIndex = state.shopping.findIndex((order) => order[id]);
-      state.shopping.splice(changeIndex, 1);
-      state.shopping.push(value);
+    changeShopping(state, { payload }) {
+      let { id, value } = payload;
+      // let changeIndex = state.shopping.findIndex((order) => order[id]);
+      // state.shopping.splice(changeIndex, 1, value);
+      // // state.shopping.push(value);
+      state.shopping = state.shopping.map(
+        (item) => (item._id = id ? { ...item, cloth: value } : item)
+      );
     },
   },
 });

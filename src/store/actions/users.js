@@ -42,16 +42,15 @@ export const deleteShopping = (id) => async (dispatch) => {
     console.log(error);
   }
 };
-export const putShopping = (id, change) => async (dispatch) => {
+export const putShopping = (order) => async (dispatch) => {
   try {
     const { value, error } = await Repository.UsersActions.putShoppingFromApi(
-      id,
-      change
+      order
     );
     if (error) {
       console.log("error getting");
     } else {
-      dispatch(users.actions.changeShopping(id, value));
+      dispatch(users.actions.changeShopping(order));
     }
   } catch (error) {
     console.log(error);
