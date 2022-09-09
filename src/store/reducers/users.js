@@ -23,7 +23,7 @@ export const users = createSlice({
       // state.shopping.splice(changeIndex, 1, value);
       // // state.shopping.push(value);
       state.shopping = state.shopping.map(
-        (item) => (item._id = id ? { ...item, cloth: value } : item)
+        (item) => (item._id == id ? { ...item, cloth: value } : item)
       );
     },
   },
